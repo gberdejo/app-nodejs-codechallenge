@@ -16,11 +16,12 @@ async function bootstrap() {
       subscribe: { fromBeginning: true },
       options: {
         client: {
+          clientId: 'transaction-consumer',
           brokers: ['localhost:9092'],
         },
-        // consumer: {
-        //   groupId: 'anti-fraud-consumer',
-        // },
+        consumer: {
+          groupId: 'transaction-group',
+        },
         run: {
           autoCommit: false,
         },

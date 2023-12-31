@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import {
   Ctx,
+  EventPattern,
   KafkaContext,
   KafkaRetriableException,
   MessagePattern,
@@ -9,7 +10,7 @@ import {
 
 @Controller('anti-fraud')
 export class AntiFraudController {
-  @MessagePattern('transactionValidation')
+  @EventPattern('transactionValidation')
   async create(
     @Payload() validateAntiFraudDto: any,
     @Ctx() context: KafkaContext,
@@ -18,7 +19,7 @@ export class AntiFraudController {
     console.log(`Topic: ${context.getTopic()}`);
     console.log(`El tiempo> ${Date().toString()}`);
 
-    throw new KafkaRetriableException(`${Date().toString()}`);
+    // throw new KafkaRetriableException(`${Date().toString()}`);
 
     const { offset } = context.getMessage();
     const partition = context.getPartition();

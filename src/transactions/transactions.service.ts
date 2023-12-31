@@ -61,10 +61,10 @@ export class TransactionsService {
     this.antiFraudClient
       .emit(
         'transactionValidation',
-        new CreateAntiFraudDto(
-          transaction.transactionExternalId,
-          transaction.value,
-        ).ToString(),
+        JSON.stringify({
+          transactionExternalId: transaction.transactionExternalId,
+          value: transaction.value,
+        }),
       )
       .subscribe({
         error(err) {
